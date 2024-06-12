@@ -9,8 +9,6 @@
     <link href="https://fonts.googleapis.com/css?family=Fredoka+One" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Nunito+Sans" rel="stylesheet">
-    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
-    <script src="https://cdn.jsdelivr.net/gh/finnhvman/fireworks-js/dist/fireworks.min.js"></script>
 </head>
 <body>
     <div class="container-fluid">
@@ -86,33 +84,6 @@
     <script src="js/bootstrap.js"></script>
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script>
-        window.onload = function() {
-
-            const fireworks = new Fireworks({
-              target: document.querySelector('#fireworks'),
-              hue: 120,
-              startDelay: 1,
-              speed: 3,
-              acceleration: 1.05,
-              friction: 0.95,
-              gravity: 1.5,
-              particles: 50,
-              trace: 3,
-              explosion: 5,
-              autoresize: true,
-              brightness: 50,
-              boundaries: {
-                x: 50,
-                y: 50,
-                width: canvas.width,
-                height: canvas.height,
-              },
-            });
-            fireworks.start();
-        };
-      </script>
-    <script>
-
         particlesJS('particles-js',
         {
         "particles": {
