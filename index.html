@@ -9,6 +9,8 @@
     <link href="https://fonts.googleapis.com/css?family=Fredoka+One" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Nunito+Sans" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
+    <script src="https://cdn.jsdelivr.net/gh/finnhvman/fireworks-js/dist/fireworks.min.js"></script>
 </head>
 <body>
     <div class="container-fluid">
@@ -32,7 +34,7 @@
         </div>
     </div>
     <div class="modal fade" id="myModal" tabindex="-2" role="dialog" aria-labelledby="myModalLabel">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog" role="document" id="scroll">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -53,14 +55,14 @@
                         </div>
                     </h1>
                     <div class="containeri">
-                        <img class="img img-responsive slide-in-left" id="img1" src="img/img1.jpg">
-                        <img class="img img-responsive slide-in-right" id="img2" src="img/img2.jpg">
-                        <img class="img img-responsive slide-in-left" id="img3" src="img/img3.jpg">
-                        <img class="img img-responsive slide-in-right" id="img4" src="img/img4.jpg">
-                        <img class="img img-responsive slide-in-left" id="img5" src="img/img5.jpg">
-                        <img class="img img-responsive slide-in-right" id="img6" src="img/img6.jpg">
-                        <img class="img img-responsive slide-in-left" id="img7" src="img/img7.jpg">
-                        <img class="img img-responsive slide-in-right" id="img8" src="img/img8.jpg">
+                        <img class="img img-responsive" id="img1" src="img/img1.jpg">
+                        <img class="img img-responsive" id="img2" src="img/img2.jpg">
+                        <img class="img img-responsive" id="img3" src="img/img3.jpg">
+                        <img class="img img-responsive" id="img4" src="img/img4.jpg">
+                        <img class="img img-responsive" id="img5" src="img/img5.jpg">
+                        <img class="img img-responsive" id="img6" src="img/img6.jpg">
+                        <img class="img img-responsive" id="img7" src="img/img7.jpg">
+                        <img class="img img-responsive" id="img8" src="img/img8.jpg">
                         <video controls="control" class="img img-responsive" width="100%">
                             <source src="img/video1.mp4" type="video/mp4" />
                         </video>
@@ -78,12 +80,39 @@
                 </div>
             <div id="animation"></div>
         <div id="particles-js"></div>
+        <canvas id="fireworks"></canvas>
     
-
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="js/bootstrap.js"></script>
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script>
+        window.onload = function() {
+
+            const fireworks = new Fireworks({
+              target: document.querySelector('#fireworks'),
+              hue: 120,
+              startDelay: 1,
+              speed: 3,
+              acceleration: 1.05,
+              friction: 0.95,
+              gravity: 1.5,
+              particles: 50,
+              trace: 3,
+              explosion: 5,
+              autoresize: true,
+              brightness: 50,
+              boundaries: {
+                x: 50,
+                y: 50,
+                width: canvas.width,
+                height: canvas.height,
+              },
+            });
+            fireworks.start();
+        };
+      </script>
+    <script>
+
         particlesJS('particles-js',
         {
         "particles": {
@@ -180,6 +209,33 @@
         "retina_detect": true
         }
         );
+        
+        window.addEventListener('scroll', scrollFunction);
+        document.querySelector('#myModal').addEventListener('scroll', scrollFunction);
+
+        function scrollFunction() {
+            console.log('scroll');
+            var elements = document.querySelectorAll('.img');
+    var windowHeight = window.innerHeight;
+
+    elements.forEach(function(element) {
+        var positionFromTop = element.getBoundingClientRect().top;
+        var positionFromBottom = element.getBoundingClientRect().bottom;
+
+        if (positionFromTop - windowHeight <= 0) {
+            if (element.id === 'img1' || element.id === 'img3' || element.id === 'img5' || element.id === 'img7') {
+                element.classList.add('slide-in-left');
+            } else {
+                element.classList.add('slide-in-right');
+            }
+        }
+
+        if (positionFromBottom < 0) {
+            element.classList.remove('slide-in-left');
+            element.classList.remove('slide-in-right');
+        }
+    });
+        }
     </script>
 </body>
 </html>
